@@ -54,6 +54,7 @@ import { AgmCoreModule } from '@agm/core';
 import { InputJugadoresComponent } from './componentes/input-jugadores/input-jugadores.component';
 import { SexoPipe } from './pipes/sexo.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdivinaHistoriaComponent } from './componentes/adivina-historia/adivina-historia.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MapaDeGoogleComponent,
     JugadoresListadoComponent,
     InputJugadoresComponent,
-    SexoPipe
+    SexoPipe,
+    AdivinaHistoriaComponent
   ],
   imports: [
     BrowserModule,

@@ -9,11 +9,13 @@ import { JuegoAdivina } from '../../clases/juego-adivina'
 })
 export class AdivinaElNumeroComponent implements OnInit {
  @Output() enviarJuego: EventEmitter<any>= new EventEmitter<any>();
-
-  nuevoJuego: JuegoAdivina;
+nuevoJuego: JuegoAdivina;
   Mensajes:string;
   contador:number;
+  contadorResult : number;
+  result : string;
   ocultarVerificar:boolean;
+  mostrarResultado : boolean;
  
   constructor() { 
     this.nuevoJuego = new JuegoAdivina();
@@ -23,6 +25,10 @@ export class AdivinaElNumeroComponent implements OnInit {
   generarnumero() {
     this.nuevoJuego.generarnumero();
     this.contador=0;
+
+    this.mostrarResultado = false;
+    this.contadorResult = this.contador;
+    this.result = "";
   }
   verificar()
   {
@@ -31,9 +37,13 @@ export class AdivinaElNumeroComponent implements OnInit {
     console.info("numero Secreto:",this.nuevoJuego.gano);  
     if (this.nuevoJuego.verificar()){
       
-      this.enviarJuego.emit(this.nuevoJuego);
-      this.MostarMensaje("Sos un Genio!!!",true);
+      this.mostrarResultado = true;
+      this.contadorResult = this.contador;
+      this.result = "Si";
+      /*this.MostarMensaje("Sos un Genio!!!",true);*/
       this.nuevoJuego.numeroSecreto=0;
+      this.contador = 0;
+      this.nuevoJuego.numeroIngresado = 0;
 
     }else{
 
@@ -62,8 +72,18 @@ export class AdivinaElNumeroComponent implements OnInit {
             mensaje="Ya le erraste "+ this.contador+" veces";
           break;
       }
-      this.MostarMensaje("#"+this.contador+" "+mensaje+" ayuda :"+this.nuevoJuego.retornarAyuda());
      
+     
+      if(this.contador > 5) {
+
+        
+        this.mostrarResultado = true;
+        this.contadorResult = this.contador;
+        this.result = "No";
+        this.nuevoJuego.numeroSecreto=0;
+        this.contador = 0;
+        this.nuevoJuego.numeroIngresado = 0;
+      }
 
     }
     console.info("numero Secreto:",this.nuevoJuego.gano);  
@@ -88,5 +108,4 @@ export class AdivinaElNumeroComponent implements OnInit {
    }  
   ngOnInit() {
   }
-
 }

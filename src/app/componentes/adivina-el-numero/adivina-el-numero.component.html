@@ -7,20 +7,23 @@
   </h1>
  </div>
 <h2></h2>
-<form name="juego">
+<div *ngIf="!mostrarResultado" class="col-12 col-md-offset-2">
+        <div class="form-group">
+          <label for="email">Ingrese número:</label>
+          <input [readonly]="nuevoJuego.numeroSecreto == 0" [(ngModel)]="nuevoJuego.numeroIngresado" placeholder="ingrese numero" name="numeroIngresado" type="text" class="form-control" style="width:70%"/>
+        </div>
+        <button mat-raised-button *ngIf="nuevoJuego.numeroSecreto == 0" style="width:70%"  (click)="generarnumero()" >Nuevo numero secreto</button>
+        <button mat-raised-button *ngIf="nuevoJuego.numeroSecreto != 0" style="width:70%;margin-top:10px"  (click)="verificar()" color="accent">Verificar</button>
+        <h2 *ngIf="nuevoJuego.numeroSecreto != 0"><p><i style="font-size:25px;color: red;" class="fa fa-spinner fa-spin"></i> Esperando que ingrese un número</p></h2>
+      </div>
 
-   <label>ingrese numero:  </label>  <input [(ngModel)]="nuevoJuego.numeroIngresado" placeholder="ingrese numero" name="numeroIngresado" type="text" class="form-control" style="width:50%"/>
-    <h1>{{nuevoJuego.numeroIngresado}}  </h1>
- 
-    <h2 [hidden]="ocultarVerificar"><button  *ngIf="nuevoJuego.numeroSecreto!=0" (click)="verificar()" class="btn btn-success btn-lg">Verificar</button></h2>
- 
-    <h2><button *ngIf="nuevoJuego.numeroSecreto==0 " (click)="generarnumero()"  class="btn btn-info btn-lg">Nuevo número secreto</button></h2>
- 
-    <h2><p *ngIf="nuevoJuego.numeroSecreto!=0" ><i class="fa fa-spinner fa-spin"></i>Esperando que ingrese un número</p></h2>
-
-    <h3 [hidden]="!nuevoJuego.gano">usted adivino el número</h3>
-    <h3 [hidden]="nuevoJuego.gano">usted aún no gano </h3>
-
-
-</form>
+      <div *ngIf="mostrarResultado" class="col-12 col-md-offset-2">
+        <div class="form-group">
+          <label for="email">Intentos: {{ contadorResult }}</label>
+        </div>
+        <div class="form-group">
+          <label for="email">Ganaste: {{ result }}</label>
+        </div>
+        <button mat-raised-button *ngIf="nuevoJuego.numeroSecreto == 0" style="width:70%"  (click)="generarnumero()" >Nuevo numero secreto</button>
+      </div>
 <div id="snackbar">{{Mensajes}}</div>

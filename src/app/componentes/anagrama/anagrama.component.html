@@ -1,3 +1,20 @@
-<p>
-  anagrama works!
-</p>
+ <div class="col-12 col-md-offset-3">
+    <div *ngIf="!mostrarResultado">
+      <div *ngIf="nuevoJuego.anagrama != null">
+    <h1>{{nuevoJuego.palabra}}</h1>
+    <label>Ingrese la palabra:  </label>  <input [(ngModel)]="nuevoJuego.ingreso" placeholder="Ingrese la palabra" name="numeroIngresado" type="text" class="form-control" style="width:70%"/>
+  </div>
+ <h2>
+    <button *ngIf="nuevoJuego.anagrama != null" mat-raised-button style="width:70%" (click)="verificar()">Verificar</button>
+    <button *ngIf="!nuevoJuego.anagrama" mat-raised-button style="width:70%" (click)="generarAnagrama()">Nuevo anagrama</button>
+ </h2>
+    </div>
+    <div *ngIf="mostrarResultado"><div class="form-group">
+        <label for="email">Intentos: {{ contadorResult }}</label>
+      </div><div class="form-group">
+          <label for="email">Ganaste: {{ nuevoJuego.gano ? 'Si' : 'No'}}</label>
+        </div><div class="form-group">
+            <label for="email">Respuesta: {{ nuevoJuego.anagrama.palabra2 }}</label>
+          </div>
+    </div>
+  </div>
